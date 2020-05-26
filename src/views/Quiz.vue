@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="quiz">
     <div class="d-flex">
       <h1 class="flex-grow-1">{{ quiz.title }}</h1>
       <v-btn color="primary" @click="showPartyInviteDialog = true">
@@ -35,22 +35,28 @@
 </template>
 
 <script>
-import PartyInvite from './PartyInvite';
+import axios from 'axios';
+import PartyInvite from '../components/PartyInvite';
 
 export default {
   name: 'Quiz',
   components: {
     PartyInvite,
   },
+  props: {
+    id: String,
+  },
   data() {
     return {
+      quiz: undefined,
       showPartyInviteDialog: false,
     };
   },
-  computed: {
-    quiz() {
-      return this.$store.state.quiz;
-    },
+  created() {
+    // this.$store.dispatch('loadQuiz', this.id);
+    axios
+      .get(`http://127.0.0.1:3000/quizzes/${this.id}`)
+      .then((response) => (this.quiz = response.data));
   },
 };
 </script>

@@ -20,47 +20,20 @@
           width="100"
         />
       </div>
-
-      <v-spacer />
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <v-content>
-      <Login v-if="!user" />
-      <Quiz v-else-if="quiz" />
-      <Home v-else />
+      <router-view />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import Login from './components/Login';
-import Home from './components/Home';
-import Quiz from './components/Quiz';
-
 export default {
   name: 'App',
-
-  components: {
-    Login,
-    Home,
-    Quiz,
-  },
-
   computed: {
     user() {
       return this.$store.state.user;
-    },
-    quiz() {
-      return this.$store.state.quiz;
     },
   },
 };

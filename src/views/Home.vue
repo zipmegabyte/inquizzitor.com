@@ -15,6 +15,16 @@
           </v-list-item>
         </v-list>
       </v-card-text>
+      <v-btn
+        fab
+        color="cyan accent-2"
+        bottom
+        right
+        absolute
+        @click="dialog = !dialog"
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
     </v-card>
   </v-container>
 </template>
@@ -29,7 +39,7 @@ export default {
   },
   methods: {
     onListItemClick(quizId) {
-      this.$store.dispatch('loadQuiz', quizId);
+      this.$router.push({ name: 'Quiz', params: { id: quizId } });
     },
   },
 };

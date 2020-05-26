@@ -35,7 +35,10 @@ export default {
         .get(
           `http://127.0.0.1:3000/user?email=${encodeURIComponent(this.email)}`
         )
-        .then((response) => this.$store.commit('SET_USER', response.data));
+        .then((response) => {
+          this.$store.commit('SET_USER', response.data);
+          this.$router.replace({ name: 'Home' });
+        });
     },
   },
 };
